@@ -153,6 +153,8 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 
 /* feature sections */
 .feature { min-height: 110vh; display: flex; flex-direction: column; justify-content: center; padding-top: 18vh; padding-bottom: 18vh; }
+/* keep copy readable above the travelling phone (stage is z-index 5) */
+.feature .mega, .feature .sub, .stat .odo-row, .stat .sub { position: relative; z-index: 6; }
 .feature .sub { margin-top: 34px; }
 .feature-right { align-items: flex-end; text-align: right; }
 .feature-right .sub { text-align: right; }
@@ -300,7 +302,7 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 /* ---------- 3D phone ---------- */
 .phone-stage {
   position: fixed; inset: 0; z-index: 5; pointer-events: none;
-  perspective: 1900px; perspective-origin: 50% 45%;
+  perspective: 1100px; perspective-origin: 50% 45%;
 }
 .phone {
   position: absolute; left: 50%; top: 50%;
@@ -309,6 +311,13 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
   will-change: transform, opacity;
 }
 .phone .face { position: absolute; inset: 0; border-radius: 54px; }
+/* stacked silhouette layers fake a rounded titanium rim so the slab
+   has visible thickness when it turns edge-on */
+.phone .edge {
+  position: absolute; inset: 0; border-radius: 54px;
+  background: linear-gradient(160deg, #34333b, #1c1b21 55%, #2a2930);
+  transform: translateZ(calc(var(--z) * 1px));
+}
 .phone .face.front { transform: translateZ(8px); }
 /* Composited children (animated screens) escape backface culling in Chromium,
    so the JS pose engine swaps faces at the 90° edge-on point instead. */
@@ -656,6 +665,13 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
       <div class="cam-island"><i></i><i></i><i></i><b class="flash"></b></div>
       <div class="back-logo">◈</div>
     </div>
+    <i class="edge" style="--z:-6"></i>
+    <i class="edge" style="--z:-4"></i>
+    <i class="edge" style="--z:-2"></i>
+    <i class="edge" style="--z:0"></i>
+    <i class="edge" style="--z:2"></i>
+    <i class="edge" style="--z:4"></i>
+    <i class="edge" style="--z:6"></i>
     <div class="face front">
     <div class="phone-frame"></div>
     <span class="btn-side"></span><span class="btn-side b2"></span><span class="btn-side b3"></span>
@@ -799,14 +815,14 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
   // rotY values accumulate whole revolutions, so between sections the phone
   // tumbles in flight and shows its back mid-transition (flowty-style).
   var poses = [
-    [9,   46, 54,    0,  -16, 1.45, 1],   // hero: peeking from bottom, tilted back
-    [22,   0,  4, -384,   -7, 1.05, 1],   // pause: right side, arrives after a full spin
-    [0,    1,  0, -720,  -90, 1.35, 1],   // vault: center landscape, spun again
-    [-22,  1,  4, -336,    7, 1.05, 1],   // memes: left side, spin unwinds forward
+    [9,   46, 54,    0,  -16, 1.40, 1],   // hero: peeking from bottom, tilted back
+    [22,   0,  4, -384,   -7, 0.95, 1],   // pause: right side, arrives after a full spin
+    [0,    1,  0, -720,  -90, 1.18, 1],   // vault: center landscape, spun again
+    [-22,  1,  4, -336,    7, 0.95, 1],   // memes: left side, spin unwinds forward
     [0,   36, 30, -336,    0, 0.50, 0]    // stat: shrink away
   ];
   var screenAt = [0, 0, 1, 2, 2];
-  var swell = [0.55, 0.5, 0.5, 0];   // extra scale mid-flight (phone grows while travelling)
+  var swell = [0.15, 0.12, 0.12, 0]; // gentle scale boost mid-flight
   var lift  = [8, 5, 5, 0];          // extra vh rise mid-flight
   var anchors = [];
   function measure() {

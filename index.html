@@ -415,10 +415,11 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 
 /* ---------- responsive ---------- */
 @media (max-width: 900px) {
-  .phone-stage { display: none; }
-  .phone-slot { display: block; margin: 60px auto 0; position: relative; width: min(280px, 74vw); aspect-ratio: 9/19.4; }
-  .phone-slot .phone { position: relative; inset: auto; left: auto; top: auto; width: 100%; transform: none !important; opacity: 1 !important; }
-  .phone-slot .s-vault .land { transform: translate(-50%, -50%); width: 100%; padding: 0 24px; }
+  .phone { width: min(250px, 62vw); }
+  .phone-stage { perspective: 900px; }
+  /* empty spacer the travelling phone occupies when the section is centered */
+  .phone-slot { display: block; height: 56vh; }
+  .s-vault .land { width: 440px; }
   .hero-card { display: none; }
   .hero-bottom { flex-direction: column; align-items: flex-start; }
   .feature { min-height: unset; padding-top: 14vh; padding-bottom: 14vh; }
@@ -814,18 +815,29 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
   // pose: [x vw, y vh, rotX, rotY, rotZ, scale, opacity]
   // rotY values accumulate whole revolutions, so between sections the phone
   // tumbles in flight and shows its back mid-transition (flowty-style).
-  var poses = [
+  var posesDesktop = [
     [9,   46, 54,    0,  -16, 1.40, 1],   // hero: peeking from bottom, tilted back
     [22,   0,  4, -384,   -7, 0.95, 1],   // pause: right side, arrives after a full spin
     [0,    1,  0, -720,  -90, 1.18, 1],   // vault: center landscape, spun again
     [-22,  1,  4, -336,    7, 0.95, 1],   // memes: left side, spin unwinds forward
     [0,   36, 30, -336,    0, 0.50, 0]    // stat: shrink away
   ];
+  // narrow viewports: stay centered, sit below the copy, smaller landscape pose
+  var posesMobile = [
+    [0, 44, 54,    0, -14, 1.15, 1],
+    [0, 14,  4, -384,  -6, 1.00, 1],
+    [0, 12,  0, -720, -90, 0.66, 1],
+    [0, 14,  4, -336,   6, 1.00, 1],
+    [0, 42, 30, -336,   0, 0.50, 0]
+  ];
+  var swellDesktop = [0.15, 0.12, 0.12, 0], swellMobile = [0.06, 0.05, 0.05, 0];
+  var poses = posesDesktop, swell = swellDesktop;
   var screenAt = [0, 0, 1, 2, 2];
-  var swell = [0.15, 0.12, 0.12, 0]; // gentle scale boost mid-flight
-  var lift  = [8, 5, 5, 0];          // extra vh rise mid-flight
+  var lift = [8, 5, 5, 0];           // extra vh rise mid-flight
   var anchors = [];
   function measure() {
+    poses = mobile.matches ? posesMobile : posesDesktop;
+    swell = mobile.matches ? swellMobile : swellDesktop;
     anchors = [0];
     poseSections.forEach(function (s) {
       anchors.push(s.offsetTop + s.offsetHeight * 0.5 - window.innerHeight * 0.5);
@@ -875,12 +887,11 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
     requestAnimationFrame(tick);
   }
   function updatePhone(y) {
-    if (mobile.matches) return;
     computeTarget(y);
     if (reduced) { cur = tgt.p.slice(); velTilt = 0; apply(cur); }
     if (spark) spark.style.transform = 'rotate(' + y * 0.12 + 'deg)';
   }
-  if (!mobile.matches && !reduced) requestAnimationFrame(tick);
+  if (!reduced) requestAnimationFrame(tick);
   function updateWords(y) {
     var r = wr.getBoundingClientRect();
     var prog = (window.innerHeight * 0.85 - r.top) / (r.height + window.innerHeight * 0.35);
@@ -892,21 +903,6 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
     updatePhone(y);
     updateWords(y);
   }
-  // mobile: place static phone clones inside sections
-  function mountMobile() {
-    if (!mobile.matches) return;
-    document.querySelectorAll('.phone-slot').forEach(function (slot) {
-      var clone = phone.cloneNode(true);
-      clone.removeAttribute('id');
-      clone.style.transform = 'none'; clone.style.opacity = '1';
-      var idx = +slot.dataset.screen;
-      clone.querySelectorAll('.app-screen').forEach(function (s, k) { s.classList.toggle('active', k === idx); });
-      slot.appendChild(clone);
-    });
-    document.querySelector('.phone-stage').style.display = 'none';
-  }
-  mountMobile();
-
   measure();
   onScroll();
   if (lenis) lenis.on('scroll', onScroll);

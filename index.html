@@ -300,13 +300,49 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 /* ---------- 3D phone ---------- */
 .phone-stage {
   position: fixed; inset: 0; z-index: 5; pointer-events: none;
-  perspective: 1500px; perspective-origin: 50% 45%;
+  perspective: 1900px; perspective-origin: 50% 45%;
 }
 .phone {
   position: absolute; left: 50%; top: 50%;
-  width: min(315px, 26vw); aspect-ratio: 9 / 19.4;
+  width: min(370px, 30vw); aspect-ratio: 9 / 19.4;
   transform-style: preserve-3d;
   will-change: transform, opacity;
+}
+.phone .face { position: absolute; inset: 0; border-radius: 54px; }
+.phone .face.front { transform: translateZ(8px); }
+/* Composited children (animated screens) escape backface culling in Chromium,
+   so the JS pose engine swaps faces at the 90° edge-on point instead. */
+.phone.show-back .face.front { visibility: hidden; }
+.phone:not(.show-back) .face.back { visibility: hidden; }
+.phone .face.back {
+  transform: rotateY(180deg) translateZ(8px);
+  background: linear-gradient(150deg, #1b1a20 0%, #101014 55%, #16151b 100%);
+  box-shadow:
+    inset 0 0 0 2px #46454c,
+    inset 0 0 0 7px #101014,
+    0 0 0 1px #26252c,
+    0 40px 90px rgba(0,0,0,.65);
+}
+.cam-island {
+  position: absolute; top: 16px; left: 16px; width: 46%; aspect-ratio: 1;
+  background: linear-gradient(145deg, #232229, #141318);
+  border-radius: 28%; box-shadow: inset 0 0 0 1.5px #33323a, 0 6px 18px rgba(0,0,0,.5);
+}
+.cam-island i {
+  position: absolute; width: 34%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 35% 32%, #3d3c46 0%, #16151b 38%, #05050a 62%, #23222b 100%);
+  box-shadow: inset 0 0 0 2px #2c2b33, 0 3px 8px rgba(0,0,0,.6);
+}
+.cam-island i:nth-child(1) { top: 9%; left: 9%; }
+.cam-island i:nth-child(2) { top: 9%; right: 9%; }
+.cam-island i:nth-child(3) { bottom: 9%; left: 9%; }
+.cam-island .flash {
+  position: absolute; bottom: 16%; right: 16%; width: 14%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, #f5eecf 0%, #b8ae86 60%, #55524a 100%);
+}
+.back-logo {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scaleX(-1);
+  font-size: 44px; color: #2e2d35;
 }
 .phone-frame {
   position: absolute; inset: 0; border-radius: 54px;
@@ -354,7 +390,7 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 .pause-btns i.ghost { background: transparent; border: 1px solid #2A1F40; color: #7C6FA0; }
 .s-vault { padding: 0; }
 .s-vault .land {
-  position: absolute; top: 50%; left: 50%; width: 520px;
+  position: absolute; top: 50%; left: 50%; width: 640px;
   transform: translate(-50%, -50%) rotate(90deg);
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding: 0 40px;
 }
@@ -616,6 +652,11 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 <!-- 3D PHONE -->
 <div class="phone-stage" aria-hidden="true">
   <div class="phone" id="phone">
+    <div class="face back">
+      <div class="cam-island"><i></i><i></i><i></i><b class="flash"></b></div>
+      <div class="back-logo">◈</div>
+    </div>
+    <div class="face front">
     <div class="phone-frame"></div>
     <span class="btn-side"></span><span class="btn-side b2"></span><span class="btn-side b3"></span>
     <div class="screen">
@@ -642,6 +683,7 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
         <div class="reacts"><i>💀 4</i><i>🔥 2</i><i>😭 7</i></div>
         <div class="pause-btns"><i>ok fine, closing 💀</i><i class="ghost">proceed anyway</i></div>
       </div>
+    </div>
     </div>
   </div>
 </div>
@@ -753,14 +795,19 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
       mobile = window.matchMedia('(max-width: 900px)');
 
   var poseSections = ['pause', 'vault', 'memes', 'stat'].map(function (id) { return document.getElementById(id); });
-  // pose: [x vw, y vh, rotX, rotY, rotZ, scale, opacity, screenIndex]
+  // pose: [x vw, y vh, rotX, rotY, rotZ, scale, opacity]
+  // rotY values accumulate whole revolutions, so between sections the phone
+  // tumbles in flight and shows its back mid-transition (flowty-style).
   var poses = [
-    [9,   46,  54,  0,  -16, 1.55, 1, 0],   // hero: peeking from bottom, tilted back
-    [23,   0,   4, -24,  -7, 1.00, 1, 0],   // pause: right side
-    [0,    2,   0,   0, -90, 1.34, 1, 1],   // vault: center, landscape
-    [-23,  1,   3,  24,   7, 1.00, 1, 2],   // memes: left side
-    [0,   30,  30,   0,   0, 0.55, 0, 2]    // stat: shrink away
+    [9,   46, 54,    0,  -16, 1.45, 1],   // hero: peeking from bottom, tilted back
+    [22,   0,  4, -384,   -7, 1.05, 1],   // pause: right side, arrives after a full spin
+    [0,    1,  0, -720,  -90, 1.35, 1],   // vault: center landscape, spun again
+    [-22,  1,  4, -336,    7, 1.05, 1],   // memes: left side, spin unwinds forward
+    [0,   36, 30, -336,    0, 0.50, 0]    // stat: shrink away
   ];
+  var screenAt = [0, 0, 1, 2, 2];
+  var swell = [0.55, 0.5, 0.5, 0];   // extra scale mid-flight (phone grows while travelling)
+  var lift  = [8, 5, 5, 0];          // extra vh rise mid-flight
   var anchors = [];
   function measure() {
     anchors = [0];
@@ -776,23 +823,48 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
     curScreen = i;
     screens.forEach(function (s, k) { s.classList.toggle('active', k === i); });
   }
-  function updatePhone(y) {
-    if (mobile.matches) return;
+  var tgt = { p: poses[0].slice(), s: 0 },
+      cur = poses[0].slice(),
+      velTilt = 0, lastY = null;
+  function computeTarget(y) {
     var i = 0;
     while (i < anchors.length - 2 && y > anchors[i + 1]) i++;
     var span = anchors[i + 1] - anchors[i] || 1;
     var t = ease(Math.min(1, Math.max(0, (y - anchors[i]) / span)));
     var a = poses[i], b = poses[i + 1], p = [];
     for (var k = 0; k < 7; k++) p[k] = lerp(a[k], b[k], t);
+    var mid = Math.sin(t * Math.PI);
+    p[5] += swell[i] * mid;
+    p[1] -= lift[i] * mid;
+    tgt.p = p;
+    tgt.s = t > 0.5 ? screenAt[i + 1] : screenAt[i];
+    if (lastY !== null) velTilt = Math.max(-12, Math.min(12, (y - lastY) * 0.04));
+    lastY = y;
+  }
+  function apply(p, bob) {
     phone.style.transform =
-      'translate(-50%, -50%) translate3d(' + p[0] + 'vw,' + p[1] + 'vh, 0)' +
-      ' rotateX(' + p[2] + 'deg) rotateY(' + p[3] + 'deg) rotateZ(' + p[4] + 'deg)' +
+      'translate(-50%, -50%) translate3d(' + p[0] + 'vw,' + (p[1] + (bob || 0)) + 'vh, 0)' +
+      ' rotateX(' + (p[2] + velTilt) + 'deg) rotateY(' + p[3] + 'deg) rotateZ(' + p[4] + 'deg)' +
       ' scale(' + p[5] + ')';
     phone.style.opacity = p[6];
-    phone.parentElement.style.visibility = p[6] <= 0.01 ? 'hidden' : 'visible';
-    setScreen(t > 0.5 ? b[7] : a[7]);
+    phone.parentElement.style.visibility = p[6] <= 0.02 ? 'hidden' : 'visible';
+    var ry = ((p[3] % 360) + 360) % 360;
+    phone.classList.toggle('show-back', ry > 90 && ry < 270);
+    setScreen(tgt.s);
+  }
+  function tick(now) {
+    for (var j = 0; j < 7; j++) cur[j] += (tgt.p[j] - cur[j]) * 0.1;
+    velTilt *= 0.92;
+    apply(cur, Math.sin(now / 1100) * 0.4);
+    requestAnimationFrame(tick);
+  }
+  function updatePhone(y) {
+    if (mobile.matches) return;
+    computeTarget(y);
+    if (reduced) { cur = tgt.p.slice(); velTilt = 0; apply(cur); }
     if (spark) spark.style.transform = 'rotate(' + y * 0.12 + 'deg)';
   }
+  if (!mobile.matches && !reduced) requestAnimationFrame(tick);
   function updateWords(y) {
     var r = wr.getBoundingClientRect();
     var prog = (window.innerHeight * 0.85 - r.top) / (r.height + window.innerHeight * 0.35);
@@ -831,7 +903,12 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
   mq.innerHTML += mq.innerHTML;
 
   // expose for headless testing
-  window.__mg = { measure: measure, update: onScroll, anchors: function () { return anchors; } };
+  window.__mg = {
+    measure: measure,
+    update: onScroll,
+    settle: function () { cur = tgt.p.slice(); velTilt = 0; apply(cur); },
+    anchors: function () { return anchors; }
+  };
 })();
 </script>
 </body>

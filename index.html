@@ -824,7 +824,7 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
   ];
   // narrow viewports: stay centered, sit below the copy, smaller landscape pose
   var posesMobile = [
-    [0, 44, 54,    0, -14, 1.15, 1],
+    [0, 27, 54,    0, -14, 1.15, 1],
     [0, 14,  4, -384,  -6, 1.00, 1],
     [0, 12,  0, -720, -90, 0.66, 1],
     [0, 14,  4, -336,   6, 1.00, 1],
@@ -905,6 +905,8 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
   }
   measure();
   onScroll();
+  cur = tgt.p.slice();   // start the spring at the correct pose (no drift-in on load)
+  apply(cur);
   if (lenis) lenis.on('scroll', onScroll);
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', function () { measure(); onScroll(); });

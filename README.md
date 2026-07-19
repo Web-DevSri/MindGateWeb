@@ -1,2 +1,1 @@
-# MindGateWeb
-Website for MindGate Application
+# MindgateSite

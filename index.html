@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MindGate — The app that holds your goals up as a mirror</title>
 <meta name="description" content="MindGate is an emotional coach for your screen time. Mindful friction — a breath, your own goals, vibe-matched memes — right when you reach for the scroll.">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png?v=2">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png?v=2">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png?v=2">
+<link rel="shortcut icon" href="favicon_io/favicon.ico?v=2">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2DDNQ82TCN"></script>
@@ -76,7 +76,8 @@ body {
 }
 .wordmark { font-weight: 600; font-size: 24px; letter-spacing: -0.03em; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
 .wordmark span { color: var(--purple); }
-.topbar .tag { font-size: 13px; color: var(--muted); border: 1px solid var(--line); padding: 7px 14px; border-radius: 100px; }
+.topbar .tag { font-size: 13px; color: var(--muted); border: 1px solid var(--line); padding: 7px 14px; border-radius: 100px; text-decoration: none; transition: color 0.2s, border-color 0.2s; }
+.topbar a.tag:hover { color: var(--ink); border-color: var(--faint); }
 
 /* ---------- floating dock ---------- */
 .dock {
@@ -442,7 +443,7 @@ section, footer.cta { position: relative; padding: 0 var(--pad-x); }
 
 <header class="topbar">
   <a class="wordmark" href="#top"><span>◈</span>mindgate</a>
-  <span class="tag">early access · android</span>
+  <a href="./privacy.html" class="tag">Read Privacy Policy</a>
 </header>
 
 <main id="top">

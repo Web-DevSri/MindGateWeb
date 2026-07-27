@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — MindGate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d0d0b;
+  --surface: #141412;
+  --surface-2: #1c1c19;
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.14);
+  --text: #f0ede6;
+  --text-secondary: #9c9a92;
+  --text-muted: #5c5b55;
+  --accent: #c8b89a;
+  --accent-warm: #d4a96a;
+  --green: #6b9e7a;
+  --green-bg: rgba(107,158,122,0.12);
+  --red-bg: rgba(180,80,80,0.12);
+  --red-text: #d08080;
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(13,13,11,0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-logo {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-logo .mark { color: var(--accent-warm); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+.nav-cta {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bg) !important;
+  background: var(--text);
+  padding: 6px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO ── */
+.hero {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 5rem 2rem 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 60px;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 1.75rem;
+}
+
+.hero-meta {
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+.badge-good {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--green-bg);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(107,158,122,0.25);
+}
+
+/* ── LAYOUT ── */
+.main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 2rem 6rem;
+}
+
+/* ── SUMMARY CARD ── */
+.summary {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-left: 3px solid var(--accent-warm);
+  border-radius: 0 12px 12px 0;
+  padding: 1.5rem 1.75rem;
+  margin: 3rem 0;
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.summary strong { color: var(--text); font-weight: 500; }
+
+/* ── SECTIONS ── */
+.section {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.section-label {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.6rem;
+}
+
+.section h2 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1.1rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.section h2 em { font-style: italic; color: var(--accent); }
+
+.section p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 0.9rem;
+}
+
+.section ul {
+  padding-left: 0;
+  list-style: none;
+  margin-bottom: 0.9rem;
+}
+
+.section li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding: 3px 0 3px 1.4rem;
+  position: relative;
+}
+
+.section li::before {
+  content: '◈';
+  position: absolute;
+  left: 0;
+  font-size: 9px;
+  color: var(--text-muted);
+  top: 8px;
+}
+
+code {
+  font-family: 'SF Mono', 'Fira Code', 'Courier New', monospace;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin: 1rem 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.card strong { color: var(--text); font-weight: 500; }
+
+/* ── TABLE ── */
+.pp-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.pp-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+
+.pp-table td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.pp-table td:first-child {
+  color: var(--text);
+  font-weight: 500;
+  font-size: 13px;
+  width: 36%;
+  padding-right: 20px;
+}
+
+.pp-table td small {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+  margin-top: 3px;
+  line-height: 1.5;
+}
+
+/* ── NEVER LIST ── */
+.never-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+  margin: 1rem 0;
+}
+
+.never-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--red-bg);
+  border: 1px solid rgba(180,80,80,0.18);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 13px;
+  color: var(--red-text);
+  line-height: 1.4;
+}
+
+.never-x {
+  font-size: 10px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+/* ── MARQUEE STRIP ── */
+.strip {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  overflow: hidden;
+  margin: 0 -2rem;
+  margin-bottom: 2rem;
+}
+
+.strip-inner {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.strip-inner span { white-space: nowrap; }
+.strip-inner .dot { color: var(--accent-warm); }
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── CONTACT ── */
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 1rem;
+}
+
+.contact-glyph {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+  color: var(--accent);
+  font-family: var(--serif);
+}
+
+.contact-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.contact-info {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.contact-info a {
+  color: var(--accent-warm);
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 13px;
+  letter-spacing: 0.3em;
+  padding: 1rem 0;
+}
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-logo {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.footer-tagline {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 3rem;
+}
+
+.footer-col h4 {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  margin-bottom: 6px;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover { color: var(--text); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  nav { padding: 1rem 1.25rem; }
+  .nav-links { display: none; }
+  .hero { padding: 3.5rem 1.25rem 2.5rem; }
+  .main { padding: 0 1.25rem 4rem; }
+  .never-grid { grid-template-columns: 1fr; }
+  .footer-links { gap: 2rem; }
+  footer { padding: 2rem 1.25rem; }
+  .strip { margin: 0 -1.25rem; margin-bottom: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="https://web-devsri.github.io/MindGateWeb/">
+    <span class="mark">◈</span>mindgate
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://web-devsri.github.io/MindGateWeb/#pause">The Pause</a></li>
+    <li><a href="https://web-devsri.github.io/MindGateWeb/#vault">Soul Vault</a></li>
+    <li><a href="https://web-devsri.github.io/MindGateWeb/#features">Vibes</a></li>
+    <li><a href="https://web-devsri.github.io/MindGateWeb/#faq">FAQ</a></li>
+    <li><a class="nav-cta" href="https://form.typeform.com/to/KYAP64qU">Get Early Access</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Legal · Privacy</div>
+  <h1>Your data stays<br><em>yours. Always.</em></h1>
+  <p class="hero-sub">
+    MindGate is local-only. No servers. No accounts. No advertising.
+    Everything you share with the app — your goals, your words, your reason — lives only on your device.
+  </p>
+  <div class="hero-meta">
+    <div class="badge-good">✓ &nbsp;No data ever sold or transmitted</div>
+    <span>Effective July 2026</span>
+    <span>Last updated July 2026</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <div class="summary">
+    <strong>The short version —</strong> MindGate reads your screen time directly from Android (the same source as Digital Wellbeing) and never sends it anywhere. Your Soul Vault — quote, dream, reason, focus music — is stored locally and excluded from cloud backup. There are no analytics SDKs, no advertising IDs, no accounts, and no servers to transmit anything to.
+  </div>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-inner">
+      <span>no servers</span><span class="dot">◈</span>
+      <span>no accounts</span><span class="dot">◈</span>
+      <span>no ads</span><span class="dot">◈</span>
+      <span>no data sold</span><span class="dot">◈</span>
+      <span>local only</span><span class="dot">◈</span>
+      <span>no tracking</span><span class="dot">◈</span>
+      <span>no analytics</span><span class="dot">◈</span>
+      <span>your words stay yours</span><span class="dot">◈</span>
+      <!-- duplicate for seamless loop -->
+      <span>no servers</span><span class="dot">◈</span>
+      <span>no accounts</span><span class="dot">◈</span>
+      <span>no ads</span><span class="dot">◈</span>
+      <span>no data sold</span><span class="dot">◈</span>
+      <span>local only</span><span class="dot">◈</span>
+      <span>no tracking</span><span class="dot">◈</span>
+      <span>no analytics</span><span class="dot">◈</span>
+      <span>your words stay yours</span><span class="dot">◈</span>
+    </div>
+  </div>
+
+  <!-- S1 -->
+  <div class="section">
+    <div class="section-label">01 — On-device storage</div>
+    <h2>What we store — and<br><em>where it stays</em></h2>
+    <p>All data is stored locally using Android DataStore and Room. Nothing is transmitted to external servers, cloud services, or third parties of any kind.</p>
+    <table class="pp-table">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Why it's stored</th>
+          <th>Location</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Soul Vault content<small>your quote, goals, reason, music title</small></td>
+          <td>Shown on the pause overlay to reconnect you with your goals at the exact moment of temptation</td>
+          <td>Device only (Android DataStore)</td>
+        </tr>
+        <tr>
+          <td>Restricted apps &amp; daily budgets</td>
+          <td>To know which apps to pause and for how long</td>
+          <td>Device only (Android DataStore)</td>
+        </tr>
+        <tr>
+          <td>Vibe &amp; palette choice</td>
+          <td>To render your chosen theme across all screens — including the overlay, with no flash</td>
+          <td>Device only (DataStore + SharedPreferences mirror)</td>
+        </tr>
+        <tr>
+          <td>Interception outcomes<small>walked away vs. proceeded, timestamp, reason category</small></td>
+          <td>Powers your dashboard's mindful-pause count, walk-away rate, and time reclaimed</td>
+          <td>Device only (Room database)</td>
+        </tr>
+        <tr>
+          <td>Streak &amp; wins</td>
+          <td>Tracks consecutive walk-away days for motivation</td>
+          <td>Device only (Android DataStore)</td>
+        </tr>
+        <tr>
+          <td>Schedule &amp; focus session</td>
+          <td>Bedtime blocking window and lock-in timer settings</td>
+          <td>Device only (Android DataStore)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- S2 -->
+  <div class="section">
+    <div class="section-label">02 — Screen time data</div>
+    <h2>Honest numbers from<br><em>Android itself</em></h2>
+    <p>MindGate reads screen time directly from Android's <code>UsageStatsManager</code> API — the same source your phone's own Digital Wellbeing uses. This means the numbers always match, because they come from the same place.</p>
+    <ul>
+      <li>Read in real time on your device, never stored permanently</li>
+      <li>Queried fresh each time you open the dashboard</li>
+      <li>Never transmitted to any server or third party</li>
+      <li>Never used for profiling, targeting, or advertising</li>
+    </ul>
+    <div class="card">
+      <strong>Usage Stats permission</strong> — <code>PACKAGE_USAGE_STATS</code> is a sensitive Android permission that requires you to manually grant access in Settings. MindGate cannot read any usage data without your explicit approval. You can revoke it at any time.
+    </div>
+  </div>
+
+  <!-- S3 -->
+  <div class="section">
+    <div class="section-label">03 — Accessibility service</div>
+    <h2>What it sees —<br><em>and what it doesn't</em></h2>
+    <p>MindGate uses Android's Accessibility Service to detect which app enters the foreground, so the pause overlay appears at exactly the right moment. This is the primary and fastest detection method.</p>
+    <ul>
+      <li>Only observes <code>TYPE_WINDOW_STATE_CHANGED</code> events — which app opened</li>
+      <li>Never reads screen content, text fields, passwords, or clipboard data</li>
+      <li>Never reads any user input or interaction</li>
+      <li>Nothing observed is recorded, stored, or transmitted</li>
+      <li>Used solely to trigger the mindful-pause overlay on your restricted apps</li>
+    </ul>
+    <p>This is described exactly this way in the accessibility service's own declaration: <em>"MindGate detects when restricted apps are opened to show a mindful pause. No screen content is ever read or recorded."</em></p>
+  </div>
+
+  <!-- S4 -->
+  <div class="section">
+    <div class="section-label">04 — Focus anthem</div>
+    <h2>Your music stays<br><em>on your device</em></h2>
+    <p>If you pick a focus anthem in the Soul Vault, MindGate stores a URI reference to the local audio file — just a file path. The audio file itself stays on your device and is never uploaded, copied, or transmitted anywhere.</p>
+    <p>The <code>READ_MEDIA_AUDIO</code> permission is requested solely to let you browse your local music library and pick a song. MindGate does not access any audio files except the one you deliberately choose.</p>
+  </div>
+
+  <!-- S5 -->
+  <div class="section">
+    <div class="section-label">05 — Permissions</div>
+    <h2>Every permission —<br><em>and exactly why</em></h2>
+    <table class="pp-table">
+      <thead>
+        <tr><th>Permission</th><th>Why it's needed</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>PACKAGE_USAGE_STATS</td>
+          <td>Read per-app usage time from Android OS for the dashboard and daily limit enforcement</td>
+        </tr>
+        <tr>
+          <td>SYSTEM_ALERT_WINDOW</td>
+          <td>Draw the mindful-pause overlay on top of restricted apps</td>
+        </tr>
+        <tr>
+          <td>FOREGROUND_SERVICE</td>
+          <td>Keep the app monitor running while you use your phone</td>
+        </tr>
+        <tr>
+          <td>FOREGROUND_SERVICE_SPECIAL_USE</td>
+          <td>Required by Android 14+ for foreground services that monitor app usage</td>
+        </tr>
+        <tr>
+          <td>RECEIVE_BOOT_COMPLETED</td>
+          <td>Restart the monitor automatically when your device reboots</td>
+        </tr>
+        <tr>
+          <td>POST_NOTIFICATIONS</td>
+          <td>Show a silent persistent notification required by Android for foreground services</td>
+        </tr>
+        <tr>
+          <td>READ_MEDIA_AUDIO</td>
+          <td>Let you pick a local song as your focus anthem in the Soul Vault</td>
+        </tr>
+        <tr>
+          <td>Accessibility Service</td>
+          <td>Detect which app enters the foreground to trigger the mindful-pause overlay</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- S6 -->
+  <div class="section">
+    <div class="section-label">06 — What we never do</div>
+    <h2>The things MindGate<br><em>will never do</em></h2>
+    <div class="never-grid">
+      <div class="never-item"><span class="never-x">✕</span> Collect personal information</div>
+      <div class="never-item"><span class="never-x">✕</span> Require accounts or sign-in</div>
+      <div class="never-item"><span class="never-x">✕</span> Transmit data to servers</div>
+      <div class="never-item"><span class="never-x">✕</span> Use advertising SDKs</div>
+      <div class="never-item"><span class="never-x">✕</span> Track advertising IDs</div>
+      <div class="never-item"><span class="never-x">✕</span> Share data with third parties</div>
+      <div class="never-item"><span class="never-x">✕</span> Use analytics platforms</div>
+      <div class="never-item"><span class="never-x">✕</span> Read screen content</div>
+      <div class="never-item"><span class="never-x">✕</span> Read passwords or keystrokes</div>
+      <div class="never-item"><span class="never-x">✕</span> Read clipboard data</div>
+      <div class="never-item"><span class="never-x">✕</span> Sell your data. Ever.</div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section">
+    <div class="section-label">07 — Cloud backup</div>
+    <h2>Kept off Google's<br><em>backup servers</em></h2>
+    <p>MindGate explicitly excludes your DataStore preferences — Soul Vault content, goals, restricted apps, streak data — from Google cloud backup. This is enforced in <code>data_extraction_rules.xml</code> and <code>backup_rules.xml</code>, which means your personal content never reaches Google's servers even if you have auto-backup enabled.</p>
+    <p>Direct device-to-device transfers (for example, when you upgrade your phone) are permitted — your data moves only between devices you control, never through a cloud intermediary.</p>
+  </div>
+
+  <!-- S8 -->
+  <div class="section">
+    <div class="section-label">08 — Children</div>
+    <h2>Built safe<br><em>by design</em></h2>
+    <p>MindGate does not knowingly collect data from anyone, including children under 13. Because no personal data is collected from any user at any age, the app is inherently compliant with COPPA and equivalent children's privacy regulations worldwide.</p>
+  </div>
+
+  <!-- S9 -->
+  <div class="section">
+    <div class="section-label">09 — Changes</div>
+    <h2>If this policy<br><em>ever changes</em></h2>
+    <p>Any material changes will be posted on this page and reflected in the Play Store listing. The effective date at the top will be updated. Continued use of MindGate after a change is posted means you accept the revised policy.</p>
+    <p>We don't anticipate this policy changing much — there's not a lot to say when you don't collect data.</p>
+  </div>
+
+  <div class="divider">◈ &nbsp; ◈ &nbsp; ◈</div>
+
+  <!-- S10 -->
+  <div class="section">
+    <div class="section-label">10 — Contact</div>
+    <h2>Questions about<br><em>this policy?</em></h2>
+    <p>Reach out. We're building this for you and happy to answer anything.</p>
+    <div class="contact-card">
+      <div class="contact-glyph">◈</div>
+      <div>
+        <div class="contact-name">MindGate developer</div>
+        <div class="contact-info">
+          Open an issue or start a discussion on GitHub —
+          <a href="https://github.com/Web-DevSri/Mindgate" target="_blank" rel="noopener">github.com/Web-DevSri/Mindgate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo"><span style="color:var(--accent-warm)">◈</span>mindgate</div>
+      <div class="footer-tagline">built for your future self</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="https://web-devsri.github.io/MindGateWeb/#pause">The Pause</a>
+        <a href="https://web-devsri.github.io/MindGateWeb/#vault">Soul Vault</a>
+        <a href="https://web-devsri.github.io/MindGateWeb/#features">Vibes</a>
+        <a href="https://web-devsri.github.io/MindGateWeb/#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Project</h4>
+        <a href="https://github.com/Web-DevSri/Mindgate" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://web-devsri.github.io/MindGateWeb/#mirror">Philosophy</a>
+        <a href="#">Privacy policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 MindGate — built for your future self. All rights reserved.</span>
+    <span>This policy applies to the MindGate Android app on Google Play.</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+# MindGate — robots.txt
+# Allow all standard search engine crawlers
+User-agent: *
+Allow: /
+
+# Explicitly allow AI / answer-engine crawlers so MindGate can be
+# indexed and cited in AI-generated answers (AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://getmindgate.com/sitemap.xml
